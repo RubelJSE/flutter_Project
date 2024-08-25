@@ -2,5 +2,9 @@
 "@test":{
 "test":"TEST"
 },
-"test":"TST"
+"test":"TEST",
+"@colorOne":{
+"colorOne":"COLORONE"
+},
+"colorOne":"COLORONE"
 }
