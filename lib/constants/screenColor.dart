@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/constants/button_class.dart';
 import 'package:my_flutter_app/constants/text_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'colorTwo.dart';
 
@@ -16,7 +17,7 @@ class _ScreenColorState extends State<ScreenColor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Screen Color", style: headingStyle),
+          title: Text(AppLocalizations.of(context)?.test??'', style: headingStyle),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
