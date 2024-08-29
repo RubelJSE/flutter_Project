@@ -6,19 +6,19 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:my_flutter_app/main.dart';
 
 import '../constants/notification_screen.dart';
-
+/// function of handling background message
 Future<void> handleBackgroundMessage(RemoteMessage message) async{
   print('title ${message.notification?.title}');
   print('body ${message.notification?.body}');
   print('payload ${message.data}');
 }
-
+/// function of handling message
 Future<void> handleMessage(RemoteMessage? message) async{
   if(message==null) return;
   navigatorKey.currentState?.pushNamed(NotificationScreen.route,arguments: message);
 
 }
-
+/// function of initialize push notification
 Future<void>initPushNotification() async{
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -58,7 +58,7 @@ final _androidChannel = const AndroidNotificationChannel(
 );
 
 final FlutterLocalNotificationsPlugin _localNotification = FlutterLocalNotificationsPlugin();
-
+/// function of handling local notification
 Future<void> initLocalNotification() async{
   const android = AndroidInitializationSettings('@drawable/ic_launcher');
   const settings = InitializationSettings(android: android);
@@ -75,6 +75,7 @@ Future<void> initLocalNotification() async{
 }
 class MessageApi{
   final _firebaseMessaging = FirebaseMessaging.instance;
+  /// function of initialize notification
   Future<void> initNotification() async{
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();

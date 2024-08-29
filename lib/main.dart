@@ -18,6 +18,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
 
   );
+  /// call initialize notification function
   await MessageApi().initNotification();
 
   var appDocumentDirectory = await pathProvider.getApplicationDocumentsDirectory();
