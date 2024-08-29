@@ -1,15 +1,25 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
-import 'package:my_flutter_app/constants/button_class.dart';
-import 'package:my_flutter_app/constants/screenColor.dart';
-import 'package:my_flutter_app/constants/text_style.dart';
+import 'package:my_flutter_app/constants/notification_screen.dart';
+import 'package:my_flutter_app/firebase_api/home_screen.dart';
+import 'package:my_flutter_app/firebase_api/message_api.dart';
+import 'package:my_flutter_app/firebase_options.dart';
+import 'package:my_flutter_app/screen/user/user_registration.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  );
+  await MessageApi().initNotification();
+
   var appDocumentDirectory = await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   if (!Hive.isBoxOpen('langBox')) {
@@ -76,7 +86,13 @@ class _ApplicationState extends State<Application> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ScreenColor(),
+      navigatorKey: navigatorKey,
+      home: const HomeScreen(
+
+      ),
+      routes: {
+        NotificationScreen.route: (context) => const NotificationScreen()
+      },
     );
   }
 }
